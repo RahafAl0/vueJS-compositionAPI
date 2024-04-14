@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-
     <h2>{{ appTitle }}</h2>
 
     <h3>{{ counterData.title }}:</h3>
@@ -11,44 +10,66 @@
       <span class="counter">{{ counterData.count }}</span>
       <button @click="increaceCounter(1, $event)" class="btn">+</button>
       <button @click="increaceCounter(2)" class="btn">++</button>
-
     </div>
+
+    <p>This Counter Is {{ evenOrOdd }}</p>
 
     <div class="edit">
       <h4>edit coounter title</h4>
-      <input v-model="counterData.title" type="text" />
+      <input v-model="counterData.title" type="text" v-autoFocus/>
     </div>
   </div>
 </template>
 
 <script setup>
-import { reactive, watch } from "vue";
+import {
+  computed,
+  onMounted,
+  reactive,
+  watch,
+} from "vue";
 
-const appTitle = 'My Counter App'
+import { vAutoFocus } from "@/directives/vAutoFocus";
+
+const appTitle = "My Counter App";
 
 // const counter = ref(0),
 //   counterTitle = ref("My Counter");
 
 const counterData = reactive({
   count: 0,
-  title: 'My Counter'
-})
+  title: "My Counter",
+});
 
-watch(() => counterData.count, (newCount) => {
-  if(newCount === 20) {
-    alert('Way to go! It is 20')
+watch(
+  () => counterData.count,
+  (newCount) => {
+    if (newCount === 20) {
+      alert("Way to go! It is 20");
+    }
   }
-})
+);
+
+const evenOrOdd = computed(() => {
+  if (counterData.count % 2 === 0) return "even";
+  return "odd";
+});
 
 const increaceCounter = (amount, e) => {
-  console.log(e)
+  console.log(e);
   counterData.count += amount;
 };
 
-const decreaseCounter = amount => {
+const decreaseCounter = (amount) => {
   counterData.count -= amount;
 };
+
+onMounted(() => {
+  console.log('Do stuff related to Counter')
+})
+
 </script>
+
 
 <style>
 .home {
