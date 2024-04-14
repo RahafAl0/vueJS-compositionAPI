@@ -6,7 +6,34 @@
   </div>
 </template>
 
+
+
 <script>
+import { ref } from 'vue'
+
+  export default {
+    setup() {
+      const counter = ref(0)
+
+      const increaceCounter = () => {
+        counter.value++
+      }
+
+      const decreaseCounter = () => {
+        counter .value--
+      }
+
+      return {
+        counter,
+        increaceCounter,
+        decreaseCounter
+      }
+    }
+  }
+
+</script>
+
+<!-- <script>
 export default {
   data() {
     return {
@@ -34,4 +61,4 @@ export default {
   font-size: 40px;
   margin: 10px;
 }
-</style>
+</style> -->
