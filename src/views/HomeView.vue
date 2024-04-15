@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    
     <h2 ref="appTitleRef">{{ appTitle }}</h2>
 
     <h3>{{ counterData.title }}:</h3>
@@ -17,41 +16,35 @@
 
     <div class="edit">
       <h4>Edit counter title:</h4>
-      <input v-model="counterData.title" type="text" v-autofocus>
+      <input v-model="counterData.title" type="text" v-autofocus />
     </div>
-
   </div>
 </template>
 
 <script setup>
+import { ref, onMounted } from "vue";
+import { vAutofocus } from "@/directives/vAutofocus";
+import { useCounter } from "@/use/useCounter";
 
+const { counterData, oddOrEven, increaseCounter, decreaseCounter } =
+  useCounter();
 
-  import { ref, reactive, computed, watch, onMounted, nextTick } from 'vue'
-  import { vAutofocus } from '@/directives/vAutofocus'
+const appTitle = "My Ok Counter App";
 
+const appTitleRef = ref(null);
 
-  const appTitle = 'My Ok Counter App'
-
-  const appTitleRef = ref(null)
-
-  onMounted(() => {
-    console.log(`The app title is ${ appTitleRef.value.offsetWidth } px wide!`)
-  })
-
-
-
-  
-
+onMounted(() => {
+  console.log(`The app title is ${appTitleRef.value.offsetWidth} px wide!`);
+});
 </script>
-
-
 
 <style>
 .home {
   text-align: center;
   padding: 20px;
 }
-.btn, .counter {
+.btn,
+.counter {
   font-size: 40px;
   margin: 10px;
 }

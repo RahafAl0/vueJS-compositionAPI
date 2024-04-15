@@ -1,7 +1,7 @@
 import { reactive, computed, watch, onMounted, nextTick } from 'vue'
 
 
-export function userCounter() {
+export function useCounter() {
   const counterData = reactive({
     count: 0,
     title: 'My Counter'
