@@ -4,9 +4,17 @@ import { acceptHMRUpdate } from 'pinia'
 export const useCounterStore = defineStore({
   id: 'counter',
   state: () => ({
-    count: 100,
+    count: 0,
     title: 'My Title'
-  })
+  }),
+  actions: {
+    increaseCounter(amount: number) {
+      this.count += amount
+    },
+    decreaseCounter(amount: number) {
+      this.count -= amount
+    }
+  }
 })
 
 if (import.meta.hot) {
